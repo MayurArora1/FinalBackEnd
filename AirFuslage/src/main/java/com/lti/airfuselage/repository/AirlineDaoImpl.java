@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.Credentials;
 import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.FlightSearchDetails;
@@ -111,6 +112,8 @@ public class AirlineDaoImpl implements AirlineDao{
 		return seatList;
 	}
 	
+	
+	//insert into payment values(1111222233334444,"12/23",123,50000000);
 	@Transactional
 	public int fetchPaymentConfirmation(PaymentDetails details) {
 		String jpql = "SELECT p from PaymentDetails p WHERE cardNumber = :cardNumber";
@@ -236,6 +239,7 @@ public class AirlineDaoImpl implements AirlineDao{
 		return seatList;
 	}
 
+	@Override
 	@Transactional
 	public int cancelTicket(long ticketNumber) {
 		TypedQuery<Tickets> query = entityManager.createQuery("FROM Tickets WHERE ticketNumber = :ticketNumber", Tickets.class);
@@ -267,5 +271,41 @@ public class AirlineDaoImpl implements AirlineDao{
 		
 		return 1;
 	}
+	
+	@Transactional
+    @Override
+    public void addAdmin(AdminLogin admin) {
+
+        entityManager.merge(admin); 
+
+    }
+	
+	@Override
+	@Transactional
+    public int adminlogin(String email, String password) {
+        return (Integer) entityManager.createQuery("select u.id from AdminLogin u where u.email= :e and u.password= :pw")
+                .setParameter("e", email)
+                .setParameter("pw", password)
+                .getSingleResult();
+    }
+	
+	@Override
+	@Transactional
+    public AdminLogin findByadminId(int id) {
+        return entityManager.find(AdminLogin.class, id);
+    }
+
+	@Override
+	public void addCard(PaymentDetails details) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public void addCard(PaymentDetails details) {
+	 * entityManager.merge(details); }
+	 */
 
 }

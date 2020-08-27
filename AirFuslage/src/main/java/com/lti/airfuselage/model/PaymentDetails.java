@@ -68,4 +68,7 @@ public class PaymentDetails {
 	public void setAccountBalance(long accountBalance) {
 		this.accountBalance = accountBalance;
 	}
+
+	
+	
 }

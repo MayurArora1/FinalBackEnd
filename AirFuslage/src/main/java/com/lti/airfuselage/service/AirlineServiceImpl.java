@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.lti.airfuselage.exception.CustomerServiceException;
+import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
@@ -75,4 +78,15 @@ public class AirlineServiceImpl implements AirlineService {
 	public int cancelTicket(long ticketNumber) {
 		return dao.cancelTicket(ticketNumber);
 	}
+	
+	@Override
+    public AdminLogin adminlogin(String email, String password) {
+        try {
+            int userId = dao.adminlogin(email, password);
+            AdminLogin u = dao.findByadminId(userId);
+            return u;
+        } catch (EmptyResultDataAccessException e) {
+            throw new CustomerServiceException("Incorrect username/password");
+        }
+    }
 }

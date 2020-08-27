@@ -2,10 +2,13 @@ package com.lti.airfuselage.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,6 +21,8 @@ import org.springframework.stereotype.Component;
 @Table(name="tickets")
 public class Tickets {
 	@Id
+	@SequenceGenerator(name = "ticket_number_seq",allocationSize = 1,initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ticket_number_seq")
 	@Column(name = "ticket_number")
 	private long ticketNumber;
 	

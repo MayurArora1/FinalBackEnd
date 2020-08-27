@@ -2,6 +2,7 @@ package com.lti.airfuselage.repository;
 
 import java.util.List;
 
+import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
@@ -26,4 +27,8 @@ public interface AirlineDao {
 	public int removeFlight(long flightId);
 	public List<String> fetchUserBookedSeats(long flightId, long userId);
 	public int cancelTicket(long ticketNumber);
+	void addAdmin(AdminLogin admin);
+	int adminlogin(String email, String password);
+	AdminLogin findByadminId(int id);
+	void addCard(PaymentDetails details);
 }

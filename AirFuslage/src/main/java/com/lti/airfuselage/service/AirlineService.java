@@ -2,6 +2,7 @@ package com.lti.airfuselage.service;
 
 import java.util.List;
 
+import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
@@ -26,4 +27,5 @@ public interface AirlineService {
 	public int deleteFlight(long flightId);
 	public List<String> getUserBookedSeats(long flightId, long userId);
 	public int cancelTicket(long ticketNumber);
+	AdminLogin adminlogin(String email, String password);
 }
