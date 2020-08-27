@@ -1,5 +1,7 @@
 package com.lti.airfuselage;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -42,6 +44,11 @@ class AirFuslageApplicationTests {
 		AdminLogin admin = new AdminLogin();
 		admin.setEmail("admin@lti");
 		admin.setPassword("Admin");
+		admin.setFirstName("Admin");
+		admin.setLastName("Singh");
+		admin.setDateOfBirth(LocalDate.of(1999, 05, 03));
+		admin.setMobileNumber("7825456859");
+		
 		dao.addAdmin(admin);;
 	}
 	

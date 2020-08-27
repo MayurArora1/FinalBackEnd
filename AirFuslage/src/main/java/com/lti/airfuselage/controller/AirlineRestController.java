@@ -10,25 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.lti.airfuselage.controller.AirlineRestController.Status.StatusType;
-import com.lti.airfuselage.dto.AdminLoginDTO;
-import com.lti.airfuselage.exception.CustomerServiceException;
-import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
-import com.lti.airfuselage.model.LoginCredentials;
-import com.lti.airfuselage.model.Passengers;
-import com.lti.airfuselage.model.PaymentDetails;
-import com.lti.airfuselage.model.SeatInfo;
-import com.lti.airfuselage.model.Tickets;
-import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.service.AirlineService;
 
 @Controller
@@ -39,7 +27,7 @@ public class AirlineRestController {
 	@Autowired
 	private AirlineService service;
 
-	// http://localhost:9090/
+/*	// http://localhost:9090/
 	@RequestMapping(path = "register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody long registerPassenger(@RequestBody User user) {
 		long result = service.registerUser(user);
@@ -60,7 +48,7 @@ public class AirlineRestController {
 		System.out.println(result);
 		return result;
 	}
-
+*/
 	// http://localhost:9090/search
 	@RequestMapping(path = "search", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Flights> getFlights(@RequestBody FlightSearchDetails details) {
@@ -68,7 +56,7 @@ public class AirlineRestController {
 		return result;
 	}
 
-	// http://localhost:9090/payment
+/*	// http://localhost:9090/payment
 	@RequestMapping(path = "payment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody PaymentDetails getPaymentConfirmation(@RequestBody PaymentDetails details) {
 
@@ -121,7 +109,7 @@ public class AirlineRestController {
 	public @ResponseBody int cancelTicket(@PathVariable("ticketNumber") long ticketNumber) {
 		return service.cancelTicket(ticketNumber);
 	}
-
+*/
 	// http://localhost:9090/addFlight
 	@RequestMapping(path = "addFlight", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody int addFlight(@RequestBody FlightDetails details) {
@@ -142,62 +130,5 @@ public class AirlineRestController {
 		return error;
 	}
 
-	@PostMapping("/adminlogin")
-	public AdminLoginStatus Adminlogin(@RequestBody AdminLoginDTO adminloginDto) {
-		try {
-			AdminLogin u = service.adminlogin(adminloginDto.getEmail(), adminloginDto.getPassword());
-			AdminLoginStatus adminloginStatus = new AdminLoginStatus();
-			adminloginStatus.setStatus(StatusType.SUCCESS);
-			adminloginStatus.setMessage("Login successful");
-			adminloginStatus.setUserId(u.getId());
-			return adminloginStatus;
-		} catch (CustomerServiceException e) {
-			AdminLoginStatus adminloginStatus = new AdminLoginStatus();
-			adminloginStatus.setStatus(StatusType.FAILURE);
-			adminloginStatus.setMessage(e.getMessage());
-			return adminloginStatus;
-		}
-
-	}
-
-	public static class AdminLoginStatus extends Status {
-
-		private int id;
-
-		public int getId() {
-			return id;
-		}
-
-		public void setUserId(int id) {
-			this.id = id;
-		}
-
-	}
-
-	public static class Status {
-		private StatusType status;
-		private String message;
-
-		public static enum StatusType {
-			SUCCESS, FAILURE;
-		}
-
-		public StatusType getStatus() {
-			return status;
-		}
-
-		public void setStatus(StatusType status) {
-			this.status = status;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public void setMessage(String message) {
-			this.message = message;
-		}
-
-	}
 
 }
