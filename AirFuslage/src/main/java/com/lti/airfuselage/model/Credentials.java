@@ -8,28 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component("credentials")
-@Scope(scopeName="prototype")
 @Entity
-@Table(name="credentials")
+@Table(name = "credentials")
 public class Credentials {
-	
+
 	@Id
 	@SequenceGenerator(name = "user_id_seq", allocationSize = 1, initialValue = 100)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private long userId;
-	
-	@Column(name="user_name")
+
+	@Column(name = "user_name")
 	private String userName;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
 
-	public Credentials() {}
+	public Credentials() {
+	}
 
 	public Credentials(String userName, String password) {
 		super();
@@ -56,5 +52,5 @@ public class Credentials {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

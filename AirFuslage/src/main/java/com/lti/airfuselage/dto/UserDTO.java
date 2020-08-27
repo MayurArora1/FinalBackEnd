@@ -1,6 +1,6 @@
-package com.lti.airfuselage.model;
+package com.lti.airfuselage.dto;
 
-public class User {
+public class UserDTO {
 
 	private String firstName;
 	private String lastName;

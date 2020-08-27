@@ -8,11 +8,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component("passengers")
-@Scope(scopeName="prototype")
 @Entity
 @Table(name="passengers")
 public class Passengers {

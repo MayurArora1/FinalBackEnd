@@ -1,6 +1,6 @@
-package com.lti.airfuselage.model;
+package com.lti.airfuselage.dto;
 
-public class FlightDetails {
+public class FlightDetailsDTO {
 
 	private String airportName;
 	private String airlineName;
@@ -12,7 +12,7 @@ public class FlightDetails {
 	private String duration;
 	private int basePrice;
 
-	public FlightDetails(String airportName, String airlineName, String source, String destination,
+	public FlightDetailsDTO(String airportName, String airlineName, String source, String destination,
 			String departureDate, String departureTime, String arrivalTime, String duration, int basePrice) {
 		super();
 		this.airportName = airportName;
@@ -98,7 +98,7 @@ public class FlightDetails {
 		this.basePrice = basePrice;
 	}
 
-	public FlightDetails() {
+	public FlightDetailsDTO() {
 
 	}
 

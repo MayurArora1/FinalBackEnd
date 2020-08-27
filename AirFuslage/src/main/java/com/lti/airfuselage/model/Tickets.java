@@ -10,44 +10,37 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component("tickets")
-@Scope(scopeName="prototype")
 @Entity
-@Table(name="tickets")
+@Table(name = "tickets")
 public class Tickets {
-	
+
 	@Id
-	@SequenceGenerator(name = "ticket_number_seq",allocationSize = 1,initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ticket_number_seq")
+	@SequenceGenerator(name = "ticket_number_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_number_seq")
 	@Column(name = "ticket_number")
 	private long ticketNumber;
-	
+
 	@Column(name = "passenger_id")
 	private long passengerId;
-	
+
 	@OneToOne
-	@Transient
-	@PrimaryKeyJoinColumn(name="passenger_id", referencedColumnName="user_id")
+	@PrimaryKeyJoinColumn(name = "passenger_id", referencedColumnName = "user_id")
 	private Credentials credential;
-	
+
 	@Column(name = "flight_id")
 	private long flightId;
-	
+
 	@OneToOne
-	@PrimaryKeyJoinColumn(name="flight_id", referencedColumnName="flight_id")
+	@PrimaryKeyJoinColumn(name = "flight_id", referencedColumnName = "flight_id")
 	private Flights flight;
-	
-	@Column(name="source")
+
+	@Column(name = "source")
 	private String source;
-	
-	@Column(name="destination")
+
+	@Column(name = "destination")
 	private String destination;
-	
+
 	public String getSource() {
 		return source;
 	}
@@ -64,28 +57,29 @@ public class Tickets {
 		this.destination = destination;
 	}
 
-	@Column(name="departure_date")
+	@Column(name = "departure_date")
 	private String departureDate;
-	
-	@Column(name="departure_time")
+
+	@Column(name = "departure_time")
 	private String departureTime;
-	
-	@Column(name="airport_name")
+
+	@Column(name = "airport_name")
 	private String airportName;
-	
-	@Column(name="class")
+
+	@Column(name = "class")
 	private String travelClass;
-	
-	@Column(name="number_of_tickets")
+
+	@Column(name = "number_of_tickets")
 	private int numberOfTickets;
-	
-	@Column(name="total_cost")
+
+	@Column(name = "total_cost")
 	private double totalCost;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private String status;
 
-	public Tickets() {}
+	public Tickets() {
+	}
 
 	public Tickets(long passengerId, Credentials credential, long flightId, Flights flight, String departureDate,
 			String departureTime, String airportName, String travelClass, int numberOfTickets, double totalCost,
@@ -199,6 +193,5 @@ public class Tickets {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-}
 
+}
