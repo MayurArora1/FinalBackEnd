@@ -11,18 +11,18 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.airfuselage.dto.FlightDetailsDTO;
+import com.lti.airfuselage.dto.FlightSearchDetailsDTO;
+import com.lti.airfuselage.dto.LoginCredentialsDTO;
+import com.lti.airfuselage.dto.SeatInfoDTO;
+import com.lti.airfuselage.dto.UserDTO;
 import com.lti.airfuselage.model.AdminLogin;
 import com.lti.airfuselage.model.Credentials;
-import com.lti.airfuselage.model.FlightDetails;
-import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
-import com.lti.airfuselage.model.LoginCredentials;
 import com.lti.airfuselage.model.Passengers;
 import com.lti.airfuselage.model.PaymentDetails;
-import com.lti.airfuselage.model.SeatInfo;
 import com.lti.airfuselage.model.Seats;
 import com.lti.airfuselage.model.Tickets;
-import com.lti.airfuselage.model.User;
 
 @Repository("dao")
 public class AirlineDaoImpl implements AirlineDao {
@@ -31,7 +31,7 @@ public class AirlineDaoImpl implements AirlineDao {
 	private EntityManager entityManager;
 
 	@Transactional
-	public long insertUser(User user) {
+	public long insertUser(UserDTO user) {
 		String sql1 = "INSERT INTO Credentials(User_Id, User_Name, Password) VALUES(user_id_seq.NEXTVAL, :userName, :password)";
 		String sql2 = "INSERT INTO Passengers(Passenger_Id, First_Name, Last_Name, Gender, Email_Id, Mobile_Number, Age)"
 				+ "VALUES(user_id_seq.CURRVAL, :firstName, :lastName, :gender, :userName, :mobileNo, :age)";
@@ -61,7 +61,7 @@ public class AirlineDaoImpl implements AirlineDao {
 		}
 	}
 
-	public long fetchCredentials(LoginCredentials credential) {
+	public long fetchCredentials(LoginCredentialsDTO credential) {
 		String jpql = "SELECT c from Credentials c WHERE userName = :userName";
 		TypedQuery<Credentials> query = entityManager.createQuery(jpql, Credentials.class);
 		query.setParameter("userName", credential.getEmailId());
@@ -82,7 +82,7 @@ public class AirlineDaoImpl implements AirlineDao {
 		return 0;
 	}
 
-	public List<Flights> fetchFlights(FlightSearchDetails details) {
+	public List<Flights> fetchFlights(FlightSearchDetailsDTO details) {
 		String jpql = "SELECT f FROM Flights f WHERE source = :source " + "AND destination = :destination "
 				+ "AND departureDate = :departureDate " + "AND availableSeats > :seats";
 
@@ -155,7 +155,7 @@ public class AirlineDaoImpl implements AirlineDao {
 	}
 
 	@Transactional
-	public void bookSeats(SeatInfo seatDetails) {
+	public void bookSeats(SeatInfoDTO seatDetails) {
 
 		String getAvailableSeatsJpql = "From Flights WHERE flightId = :flightId";
 		TypedQuery<Flights> query2 = entityManager.createQuery(getAvailableSeatsJpql, Flights.class);
@@ -184,7 +184,7 @@ public class AirlineDaoImpl implements AirlineDao {
 	}
 
 	@Transactional
-	public int addFlights(FlightDetails details) {
+	public int addFlights(FlightDetailsDTO details) {
 		String sql = "INSERT INTO Flights(Flight_Id, Airport_Name, Airline_Name, Source, Destination, Departure_Date, Departure_Time, Arrival_Time, Duration, Total_Seats, Available_Seats, Base_Price) "
 				+ "VALUES(flight_id_seq.NEXTVAL, :airportName, :airlineName, :source, :destination, :departureDate, :departureTime, :arrivalTime, :duration, 48, 48, :basePrice)";
 

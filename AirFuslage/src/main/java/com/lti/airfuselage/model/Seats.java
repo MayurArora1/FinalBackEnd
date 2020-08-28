@@ -6,9 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import com.lti.airfuselage.dto.SeatsCompositeKeyDTO;
+
 
 @Entity
-@IdClass(SeatsCompositeKey.class)
+@IdClass(SeatsCompositeKeyDTO.class)
 @Table(name = "seats")
 public class Seats {
 

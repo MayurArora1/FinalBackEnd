@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.lti.airfuselage.model.FlightDetails;
-import com.lti.airfuselage.model.FlightSearchDetails;
+
+import com.lti.airfuselage.dto.FlightDetailsDTO;
+import com.lti.airfuselage.dto.FlightSearchDetailsDTO;
 import com.lti.airfuselage.model.Flights;
 import com.lti.airfuselage.service.AirlineService;
 
@@ -30,14 +31,14 @@ public class AirlineRestController {
 	
 	// http://localhost:9090/search
 	@RequestMapping(path = "search", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<Flights> getFlights(@RequestBody FlightSearchDetails details) {
+	public @ResponseBody List<Flights> getFlights(@RequestBody FlightSearchDetailsDTO details) {
 		List<Flights> result = service.getFlightDetails(details);
 		return result;
 	}
 
 	// http://localhost:9090/addFlight
 	@RequestMapping(path = "addFlight", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody int addFlight(@RequestBody FlightDetails details) {
+	public @ResponseBody int addFlight(@RequestBody FlightDetailsDTO details) {
 		int result = service.addFlightDetails(details);
 		return result;
 	}

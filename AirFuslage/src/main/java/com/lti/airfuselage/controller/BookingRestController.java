@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lti.airfuselage.dto.SeatInfoDTO;
 import com.lti.airfuselage.model.PaymentDetails;
-import com.lti.airfuselage.model.SeatInfo;
 import com.lti.airfuselage.model.Tickets;
 import com.lti.airfuselage.service.AirlineService;
 
@@ -48,7 +48,7 @@ public class BookingRestController {
 
 		// http://localhost:9090/seats
 		@RequestMapping(path = "seats", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public @ResponseBody void bookSeats(@RequestBody SeatInfo seatDetails) {
+		public @ResponseBody void bookSeats(@RequestBody SeatInfoDTO seatDetails) {
 			service.bookSeats(seatDetails);
 		}
 

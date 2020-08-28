@@ -9,8 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.lti.airfuselage.dto.FlightDetailsDTO;
 import com.lti.airfuselage.model.AdminLogin;
-import com.lti.airfuselage.model.FlightDetails;
 import com.lti.airfuselage.model.PaymentDetails;
 import com.lti.airfuselage.repository.AirlineDao;
 
@@ -25,7 +25,7 @@ class AirFuslageApplicationTests {
 	@Test
 	void addFlight() {
 
-		FlightDetails f = new FlightDetails();
+		FlightDetailsDTO f = new FlightDetailsDTO();
 		f.setAirlineName("Airfuslage");
 		f.setAirportName("Indira Gandhi");
 		f.setSource("Mumbai");

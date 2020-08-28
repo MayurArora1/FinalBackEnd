@@ -7,17 +7,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.lti.airfuselage.dto.FlightDetailsDTO;
+import com.lti.airfuselage.dto.FlightSearchDetailsDTO;
+import com.lti.airfuselage.dto.LoginCredentialsDTO;
+import com.lti.airfuselage.dto.SeatInfoDTO;
+import com.lti.airfuselage.dto.UserDTO;
 import com.lti.airfuselage.exception.CustomerServiceException;
 import com.lti.airfuselage.model.AdminLogin;
-import com.lti.airfuselage.model.FlightDetails;
-import com.lti.airfuselage.model.FlightSearchDetails;
 import com.lti.airfuselage.model.Flights;
-import com.lti.airfuselage.model.LoginCredentials;
 import com.lti.airfuselage.model.Passengers;
 import com.lti.airfuselage.model.PaymentDetails;
-import com.lti.airfuselage.model.SeatInfo;
 import com.lti.airfuselage.model.Tickets;
-import com.lti.airfuselage.model.User;
 import com.lti.airfuselage.repository.AirlineDao;
 
 @Service("service")
@@ -27,15 +27,15 @@ public class AirlineServiceImpl implements AirlineService {
 	@Autowired
 	private AirlineDao dao;
 
-	public long registerUser(User user) {
+	public long registerUser(UserDTO user) {
 		return dao.insertUser(user);
 	}
 
-	public long getUser(LoginCredentials credential) {
+	public long getUser(LoginCredentialsDTO credential) {
 		return dao.fetchCredentials(credential);
 	}
 
-	public List<Flights> getFlightDetails(FlightSearchDetails details) {
+	public List<Flights> getFlightDetails(FlightSearchDetailsDTO details) {
 		return dao.fetchFlights(details);
 	}
 
@@ -51,7 +51,7 @@ public class AirlineServiceImpl implements AirlineService {
 		return dao.bookTicket(details);
 	}
 
-	public void bookSeats(SeatInfo seatDetails) {
+	public void bookSeats(SeatInfoDTO seatDetails) {
 		dao.bookSeats(seatDetails);
 	}
 
@@ -63,7 +63,7 @@ public class AirlineServiceImpl implements AirlineService {
 		return dao.fetchUser(userId);
 	}
 
-	public int addFlightDetails(FlightDetails details) {
+	public int addFlightDetails(FlightDetailsDTO details) {
 		return dao.addFlights(details);
 	}
 
